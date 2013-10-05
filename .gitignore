@@ -1,0 +1,4 @@
+venv
+*.pyc
+staticfiles
+MindMap/settings/local.py
