@@ -1,3 +1,5 @@
+var highlights= new Array();
+
 $(document).ready(function() {
     $('#submit').click(function() {
 	var txt = $('#input').val();
@@ -9,7 +11,35 @@ $(document).ready(function() {
 	alchemize('category',txt,parseCat);
     });
     $('.carousel').carousel('pause');
+    $(document).click(function(){removeHighlighting();});
 });
+
+function removeHighlighting()
+{
+   $('#keywordList').children().removeClass('active');
+   /*
+   var curH = highlights.shift();
+   var text =
+       $($('#keywordList').children('li').get(curH))
+       .text();
+   var str = $('#input').val();
+   str = str.replace(/(<mark>)/,"");
+   str = str.replace(/(<\/mark>)/,"")
+   */
+   //$('#input').val(str);
+}
+
+function insertHighlighting(curNode)
+{
+    curNode.addClass('active');
+    var text = curNode.text();
+    var re = new RegExp('('+text+')');
+    var str = $('#input').val();
+    str = str.replace(re,"<mark>$&</mark>");
+    $('#highlighted').html(str);
+    $('#myModal').modal();
+   //$('#input').val(str);
+}
 
 function alchemize(type,text,fxn)
 {
@@ -78,7 +108,7 @@ function parseCat(catObj)
 }
 
 function makeWikiLink(text){
-    return "<a href='http://wikipedia.org/wiki/"+encodeURIComponent(text)+ "'>"+text+"</a>";
+    return "<a target='_blank' href='http://wikipedia.org/wiki/"+encodeURIComponent(text)+ "'>"+text+"</a>";
 }
 
 function parseConcepts(conceptObj)
@@ -94,8 +124,22 @@ function parseKeywords(keyWordObj)
     for(var i = 0; i < keywords.length; ++i)
     {
 	var keyw = keywords[i].text;
-	addListItem($('#keywordList'),keyw);
+	addListItem($('#keywordList'),'<a>'+keyw+'</a>');
+	$('#keyWordList').children().last().click(function(e){
+	    alert('hello');
+	});
     }
+    $('#keywordList').children().click(function(e){
+
+	    var needs = !$(this).hasClass('active');
+	    removeHighlighting();
+	    if(needs)
+	    {
+	        insertHighlighting($(this));
+	    }
+	    e.preventDefault();
+	    e.stopPropagation();
+    });
 }
 function parseEntities(entityObj)
 {

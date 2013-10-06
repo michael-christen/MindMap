@@ -11,8 +11,8 @@
 -->
 <div class = 'container'>
 <div class='row'>
-<h2 class='span2'>Know Your Notes</h2>
-<button id="submit" class="btn span3" style='display: inline-block;
+<h2 class='span3'>Know Your Notes</h2>
+<button id="submit" class="btn span2" style='display: inline-block;
 margin-top: 15px'>Alchemize</button>
 <h1 id="Category" class="span7"></h1>
 </div>
@@ -35,7 +35,7 @@ margin-top: 15px'>Alchemize</button>
 	      </ul>
 	   </div>
 	   <div class='tab-pane list' id='keywords'>
-	      <ul id='keywordList'>
+	      <ul id='keywordList' class='nav nav-list'>
 	      </ul>
 	   </div>
 	</div>
@@ -63,7 +63,24 @@ margin-top: 15px'>Alchemize</button>
 	    <a class='carousel-control right' href='#flashCarousel' data-slide='next'>&rsaquo;</a>
 	</div>
    </div>
-</div>
+   </div>
+    
+   <!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1"
+   role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal"
+	 aria-hidden="true">×</button>
+     <h3 id="myModalLabel">Keyword Search Result</h3>
+    </div>
+    <div class="modal-body">
+     <p id='highlighted'></p>
+    </div>
+    <div class="modal-footer">
+     <button class="btn" data-dismiss="modal"
+     aria-hidden="true">Close</button>
+    </div>
+  </div>
 </div>
  
 <!-- run from the minified library file: -->
@@ -72,4 +89,5 @@ margin-top: 15px'>Alchemize</button>
 <script src="{% static "maps/js/relations.js" %}"></script>  
 <script src="{% static "bootstrap/js/bootstrap-tabs.js" %}"></script>  
 <script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>  
 {% endblock %}
