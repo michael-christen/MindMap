@@ -1,0 +1,39 @@
+{% extends 'maps/base.html' %}
+{% load staticfiles %}
+{% block title %} {{lecture.title}} {% endblock %}
+{% block body %} 
+<!--
+<svg id='graph' xmlns='http://www.w3.org/2000/svg' version='1.1'
+ preserveAspectRatio='xMidYMid slice'>
+    <circle cx="100" cy='50' r='40' stroke='black'
+    stroke-width='2' fill='red'/>
+</svg>
+-->
+<div class = 'container'>
+<div class='row'>
+<h2 class=span4'><a href='#'>{{lecture.title}}</a></h2>
+</div>
+<div class='row'>
+<p class='span5'>Created: {{lecture.creationTime}}</p>
+<a class='btn span3'href='/all/{{lecture.id}}'>Analyze All</a>
+</div>
+<table class='table table-bordered table-striped table-hover'>
+    <tr>
+        <th>Number</th>
+    </tr>
+    {% for note in notes %}
+    <tr>
+        <td><a href='/{{note.id}}'>{{note.id}}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+ 
+<!-- run from the minified library file: -->
+<script src="{% static "arbor/arbor.js" %}"></script>  
+<script src="{% static "arbor/arbor-tween.js" %}"></script>  
+<script src="{% static "maps/js/relations.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-tabs.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>  
+{% endblock %}

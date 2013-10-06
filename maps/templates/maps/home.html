@@ -11,13 +11,26 @@
 -->
 <div class = 'container'>
 <div class='row'>
+<h2 class=span4'><a href='/lectures'>Lectures</a></h2>
+<button class='btn span3' id='saveNote'>Save To Lecture</button>
+<form action='/saveNote' class='span4'method='post' id='noteForm'>
+<input type='hidden' id='saveText' name='text'/>
+<select name='lecture'>
+{% for lecture in lectures %}
+<option value='{{lecture.id}}'>{{lecture.title}}</option>
+{% endfor %}
+</select>
+</form>
+</div>
+<div class='row'>
 <h2 class='span3'>Know Your Notes</h2>
 <button id="submit" class="btn span2" style='display: inline-block;
 margin-top: 15px'>Alchemize</button>
 <h1 id="Category" class="span7"></h1>
 </div>
 <div class='row'>
-    <textarea id="input" class='span7' style="height: 225px" rows="10">
+    <textarea id="input" class='span7' style="height: 225px"
+    rows="10">{{noteText}}
     </textarea>
     <div class='span5'>
 	<ul class="nav nav-tabs" id='myTab'>

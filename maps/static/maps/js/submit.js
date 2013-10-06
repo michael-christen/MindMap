@@ -12,6 +12,11 @@ $(document).ready(function() {
     });
     $('.carousel').carousel('pause');
     $(document).click(function(){removeHighlighting();});
+    $('#saveNote').click(function()
+	{
+	$('#saveText').val($('#input').val());
+	$('#noteForm').submit();
+	});
 });
 
 function removeHighlighting()

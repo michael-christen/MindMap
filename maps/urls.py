@@ -3,6 +3,12 @@ from maps import views
 
 urlpatterns = patterns('',
 	url(r'^$', views.home),
+	url(r'^(\d+)/$', views.homeLoad),
+	url(r'^all/(\d+)/$', views.loadAll),
+	url(r'^lectures$', views.lectures),
+	url(r'^lecture/(\d+)/$', views.lecture),
+	url(r'^createLecture$', views.createLecture),
+	url(r'^saveNote$', views.saveNote),
 	url(r'^alchemy/entity$', views.alchemyEntity),
 	url(r'^alchemy/sentiment$', views.alchemySentiment),
 	url(r'^alchemy/keyword$', views.alchemyKeyword),

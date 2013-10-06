@@ -1,0 +1,42 @@
+{% extends 'maps/base.html' %}
+{% load staticfiles %}
+{% block title %} Lectures {% endblock %}
+{% block body %} 
+<!--
+<svg id='graph' xmlns='http://www.w3.org/2000/svg' version='1.1'
+ preserveAspectRatio='xMidYMid slice'>
+    <circle cx="100" cy='50' r='40' stroke='black'
+    stroke-width='2' fill='red'/>
+</svg>
+-->
+<div class = 'container'>
+<div class='row'>
+<h2 class=span4'><a href='/lectures'>Lectures</a></h2>
+</div>
+<div class='row'>
+<form action='/createLecture'method='post'>
+<button type='submit' class='btn'>Create a lecture</button>
+<input type='text' name='title'/>
+</form>
+<table class='table table-bordered table-striped table-hover'>
+    <tr>
+        <th>Title</th>
+	<th>Created</th>
+    </tr>
+    {% for lecture in lectures %}
+    <tr>
+        <td><a href='/lecture/{{lecture.id}}'>{{lecture.title}}</a></td>
+        <td>{{lecture.creationTime}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+ 
+<!-- run from the minified library file: -->
+<script src="{% static "arbor/arbor.js" %}"></script>  
+<script src="{% static "arbor/arbor-tween.js" %}"></script>  
+<script src="{% static "maps/js/relations.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-tabs.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-modal.js" %}"></script>  
+{% endblock %}
