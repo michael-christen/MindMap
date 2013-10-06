@@ -8,6 +8,7 @@ $(document).ready(function() {
 	alchemize('relation',txt,parseRels);
 	alchemize('category',txt,parseCat);
     });
+    $('.carousel').carousel('pause');
 });
 
 function alchemize(type,text,fxn)
@@ -24,6 +25,7 @@ function addListItem(list, newStr)
 {
     list.append("<li>"+newStr+"</li>");
 }
+
 
 function parseRels(relObj)
 {
@@ -44,12 +46,29 @@ function parseRels(relObj)
 
 	sys.addEdge(cur.subject.text,cur.object.text,
 		{name:cur.action.text, length:6});
+	var row = document.createElement('div');
+	$(row).addClass('row').addClass('item');
+	if(i==0)
+	    $(row).addClass('active');
+	var card = document.createElement('div');
+	$(card).addClass('card').addClass('span6').
+	    addClass('offset3').addClass('hero-unit');
+	var question = document.createElement('div');
+	$(question).addClass('question').text('Question: '+cur.subject.text + ' '+
+		cur.action.text+ ' what?').appendTo($(card));
+	var btn = document.createElement('button');
+	$(btn).addClass('btn').text('Answer:').click(function(){
+		$(this).siblings('.answer').toggle();})
+	    .appendTo($(card)).css('display','inline-block');
+	var answer = document.createElement('div');
+	$(answer).addClass('answer').text(cur.object.text)
+	   .css('display','inline-block').hide().appendTo($(card));
+	$(card).appendTo($(row));
+	$(row).appendTo($('#flashList'));
 	/*
-	console.log("Subject: "+cur.subject.text);
-	console.log("Verb: "+cur.action.text);
-	console.log("Object: "+cur.object.text);
-	console.log('\n');
-	*/
+	addListItem($('#flashcardHolder'),
+		cur.subject.text + ' '+ cur.action.text+ ' what?');
+		*/
     }
 }
 

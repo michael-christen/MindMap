@@ -26,28 +26,50 @@ margin-top: 15px'>Alchemize</button>
 	   <li><a href='#keywords' data-toggle='tab'>Keywords</a></li>
 	</ul>
 	<div class='tab-content'>
-	   <div class='tab-pane active' id='concepts'>
+	   <div class='tab-pane list active' id='concepts'>
 	      <ul id='conceptList'>
 	      </ul>
 	   </div>
-	   <div class='tab-pane' id='entities'>
+	   <div class='tab-pane list' id='entities'>
 	      <ul id='entityList'>
 	      </ul>
 	   </div>
-	   <div class='tab-pane' id='keywords'>
+	   <div class='tab-pane list' id='keywords'>
 	      <ul id='keywordList'>
 	      </ul>
 	   </div>
 	</div>
     </div>
 </div>
-</div>
 <p id="output">
 </p>
-<canvas id="viewport" width="1350" height="800"></canvas>
+<ul class="nav nav-tabs" id='myOtherTab'>
+   <li class='active'><a href='#map' data-toggle='tab'>Relationships</a></li>
+   <li><a href='#flashcards' data-toggle='tab'>FlashCards</a></li>
+</ul>
+<div class='tab-content' style='overflow:visible'>
+   <div class='tab-pane active' id='map'>
+    <canvas id="viewport" width="1350" height="800"></canvas>
+   </div>
+    <div class='tab-pane' id='flashcards'>
+        <div id="flashCarousel" class='carousel slide'>
+	    <div class='carousel-inner' id='flashList'>
+	    <!--
+		<div class='active item'> Hello </div>
+		<div class='item'> What's up </div>
+		-->
+	    </div>
+	    <a class='carousel-control left' href='#flashCarousel' data-slide='prev'>&lsaquo;</a>
+	    <a class='carousel-control right' href='#flashCarousel' data-slide='next'>&rsaquo;</a>
+	</div>
+   </div>
+</div>
+</div>
+ 
 <!-- run from the minified library file: -->
 <script src="{% static "arbor/arbor.js" %}"></script>  
 <script src="{% static "arbor/arbor-tween.js" %}"></script>  
 <script src="{% static "maps/js/relations.js" %}"></script>  
 <script src="{% static "bootstrap/js/bootstrap-tabs.js" %}"></script>  
+<script src="{% static "bootstrap/js/bootstrap-carousel.js" %}"></script>  
 {% endblock %}
