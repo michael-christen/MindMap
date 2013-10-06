@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang = "en">
+<head>
+<title> {% block title %}{% endblock %}</title>
+<meta charset = "utf-8"/>
+<script src="{% static "jQuery/jquery-1.10.1.min.js" %}"></script>
+<script src="{% static "maps/js/submit.js" %}"></script>
+<link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+<link href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}" rel="stylesheet" media="screen">
+<link rel='shortcut icon' href='{% static "favicon.ico" %}' type='image/x-icon' />
+</head>
+<body>
+{% block body %}
+{% endblock %}
+</body>
+</html>

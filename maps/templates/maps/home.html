@@ -1,0 +1,24 @@
+{% extends 'maps/base.html' %}
+{% load staticfiles %}
+{% block title %} Trying hard {% endblock %}
+{% block body %} 
+<h2>Hello</h2>
+<!--
+<svg id='graph' xmlns='http://www.w3.org/2000/svg' version='1.1'
+ preserveAspectRatio='xMidYMid slice'>
+    <circle cx="100" cy='50' r='40' stroke='black'
+    stroke-width='2' fill='red'/>
+</svg>
+-->
+<textarea id="input" rows="10">
+</textarea>
+<button id="submit" class="btn">Alchemize</button>
+<p id="output">
+</p>
+<canvas id="viewport" width="800" height="600"></canvas>
+<!-- run from the minified library file: -->
+<script src="{% static "arbor/arbor.js" %}"></script>  
+<script src="{% static "arbor/arbor-tween.js" %}"></script>  
+<script src="{% static "maps/js/relations.js" %}"></script>  
+
+{% endblock %}

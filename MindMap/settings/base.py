@@ -130,6 +130,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+	'maps',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -181,6 +182,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(BASE_DIR))
 BASE_DIR = os.path.dirname(os.path.abspath(BASE_DIR))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'notes/static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'maps/static'),)
 
 
