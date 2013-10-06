@@ -38,7 +38,7 @@ function insertHighlighting(curNode)
 {
     curNode.addClass('active');
     var text = curNode.text();
-    var re = new RegExp('('+text+')');
+    var re = new RegExp('('+text+')','g');
     var str = $('#input').val();
     str = str.replace(re,"<mark>$&</mark>");
     $('#highlighted').html(str);
