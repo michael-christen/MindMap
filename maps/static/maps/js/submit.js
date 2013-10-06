@@ -77,11 +77,15 @@ function parseCat(catObj)
     $('#Category').text('Category: '+catObj.category);
 }
 
+function makeWikiLink(text){
+    return "<a href='http://wikipedia.org/wiki/"+encodeURIComponent(text)+ "'>"+text+"</a>";
+}
+
 function parseConcepts(conceptObj)
 {
     var concepts = conceptObj.concepts;
     for(var i = 0; i < concepts.length; ++i)
-	addListItem($('#conceptList'),concepts[i].text);
+	addListItem($('#conceptList'),makeWikiLink(concepts[i].text));
 }
 function parseKeywords(keyWordObj)
 {
@@ -97,6 +101,6 @@ function parseEntities(entityObj)
 {
     var entities = entityObj.entities;
     for(var i = 0; i < entities.length; ++i)
-	addListItem($('#entityList'), entities[i].text);
+	addListItem($('#entityList'),makeWikiLink(entities[i].text));
 }
 

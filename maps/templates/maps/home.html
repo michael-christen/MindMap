@@ -1,6 +1,6 @@
 {% extends 'maps/base.html' %}
 {% load staticfiles %}
-{% block title %} Trying hard {% endblock %}
+{% block title %} Know Notes {% endblock %}
 {% block body %} 
 <!--
 <svg id='graph' xmlns='http://www.w3.org/2000/svg' version='1.1'
@@ -11,7 +11,7 @@
 -->
 <div class = 'container'>
 <div class='row'>
-<h2 class='span2'>Mind Map</h2>
+<h2 class='span2'>Know Your Notes</h2>
 <button id="submit" class="btn span3" style='display: inline-block;
 margin-top: 15px'>Alchemize</button>
 <h1 id="Category" class="span7"></h1>
@@ -49,7 +49,7 @@ margin-top: 15px'>Alchemize</button>
 </ul>
 <div class='tab-content' style='overflow:visible'>
    <div class='tab-pane active' id='map'>
-    <canvas id="viewport" width="1350" height="800"></canvas>
+    <canvas id="viewport" width="1225" height="800"></canvas>
    </div>
     <div class='tab-pane' id='flashcards'>
         <div id="flashCarousel" class='carousel slide'>
