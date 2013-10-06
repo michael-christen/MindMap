@@ -1,0 +1,3 @@
+[submodule "sdk_python"]
+	path = sdk_python
+	url = https://github.com/steveherschleb/sdk_python.git
