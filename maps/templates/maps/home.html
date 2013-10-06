@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% block title %} Trying hard {% endblock %}
 {% block body %} 
-<h2>Hello</h2>
 <!--
 <svg id='graph' xmlns='http://www.w3.org/2000/svg' version='1.1'
  preserveAspectRatio='xMidYMid slice'>
@@ -10,12 +9,19 @@
     stroke-width='2' fill='red'/>
 </svg>
 -->
-<textarea id="input" rows="10">
+<div class = 'container'>
+<div class='row'>
+<h2 class='span2'>Mind Map</h2>
+<button id="submit" class="btn span3" style='display: inline-block;
+margin-top: 15px'>Alchemize</button>
+<h1 id="Category" class="span7"></h1>
+</div>
+</div>
+<textarea id="input" style="width:654px; height: 225px" rows="10">
 </textarea>
-<button id="submit" class="btn">Alchemize</button>
 <p id="output">
 </p>
-<canvas id="viewport" width="800" height="600"></canvas>
+<canvas id="viewport" width="1350" height="800"></canvas>
 <!-- run from the minified library file: -->
 <script src="{% static "arbor/arbor.js" %}"></script>  
 <script src="{% static "arbor/arbor-tween.js" %}"></script>  

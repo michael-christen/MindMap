@@ -6,7 +6,7 @@ $(document).ready(function() {
 	alchemize('keyword',txt,print);
 	alchemize('concept',txt,print);
 	alchemize('relation',txt,parseRels);
-	alchemize('category',txt,print);
+	alchemize('category',txt,parseCat);
     });
 });
 
@@ -26,11 +26,27 @@ function parseRels(relObj)
     for(var i = 0; i < relations.length; ++i)
     {
 	var cur = relations[i];
+	var curNode = sys.getNode(cur.subject.text);
+	if(curNode)
+	    curNode.data.subject = true;
+	else
+	    sys.addNode(cur.subject.text,{subject:true});
+	curNode = sys.getNode(cur.object.text);
+	if(curNode)
+	    curNode.data.object = true;
+	else
+	    sys.addNode(cur.object.text,{object:true});
+
 	sys.addEdge(cur.subject.text,cur.object.text,
-		{name:cur.action.text});
+		{name:cur.action.text, length:6});
 	console.log("Subject: "+cur.subject.text);
 	console.log("Verb: "+cur.action.text);
 	console.log("Object: "+cur.object.text);
 	console.log('\n');
     }
+}
+
+function parseCat(catObj)
+{
+    $('#Category').text('Category: '+catObj.category);
 }

@@ -72,6 +72,30 @@ var sys;
           ctx.moveTo(pt1.x, pt1.y)
           ctx.lineTo(pt2.x, pt2.y)
           ctx.stroke()
+	  ctx.save()
+	  // move to the head // position of the edge we // just drew
+	  var wt = ctx.lineWidth;
+	  var arrowLength = 6 + wt;
+	  var arrowWidth = 4 + wt;
+	  var angle = Math.atan2(pt2.y - pt1.y, pt2.x - pt1.x);
+	  var dist = Math.sqrt(Math.pow((pt2.x-pt1.x),2)+
+	      Math.pow((pt2.y-pt1.y),2));
+	  ctx.fillStyle = ctx.strokeStyle;
+	  ctx.translate(pt2.x-Math.cos(angle)*dist*2.0/5,
+		 pt2.y-Math.sin(angle)*dist*2.0/5);
+	  ctx.rotate(angle);
+	  // delete some of the edge that's already there (so the
+	  // point isn't hidden)
+	  ctx.clearRect(-arrowLength/2,-wt/2, arrowLength/2,wt);
+	  // draw the chevron
+	  ctx.beginPath();
+	  ctx.moveTo(-arrowLength, arrowWidth);
+	  ctx.lineTo(0, 0);
+	  ctx.lineTo(-arrowLength, -arrowWidth);
+	  ctx.lineTo(-arrowLength * 0.8, -0);
+	  ctx.closePath();
+	  ctx.fill();
+	  ctx.restore()
 
 	  ctx.fillStyle = 'black';
 	  ctx.font = 'italic 13px sans-serif';
@@ -87,26 +111,31 @@ var sys;
 		var actDim;
 		var lineHeight = 25;
 
-		ctx.font = '16pt Calibri';
-		ctx.fillStyle = '#333';
-
-		ctx.fillStyle = 'black';
-		ctx.font = 'italic 13px sans-serif';
-
-		actDim =  getDim(ctx, node.name, maxWidth, lineHeight);
-		var actHeight = actDim.height;
-		var actWidth = actDim.width;
 		// draw a rectangle centered at pt
+		/*
 		ctx.beginPath();
 		ctx.rect(pt.x-10, pt.y-actHeight/2 - 10,
 		    actWidth+10,actHeight+10);
 		ctx.fillStyle = "white"; 
 		ctx.fill();
-		ctx.lineWidth = 7;
 		ctx.strokeStyle = 'black';
 		ctx.stroke();
+		*/
+		actDim =  getDim(ctx, node.name, maxWidth, lineHeight);
+		var actHeight = actDim.height;
+		var actWidth = actDim.width;
+		ctx.fillStyle = 'white';
+		if(node.data.object && node.data.subject)
+		    ctx.strokeStyle = 'purple';
+		else if(node.data.subject)
+		    ctx.strokeStyle = 'de272b';
+		else
+		    ctx.strokeStyle = '2ebab8';
+		ctx.lineWidth = 3;
+		roundRect(ctx,pt.x-10,pt.y-actHeight/2-10,
+			actWidth+15, actHeight+15,10,'white','black');
 		ctx.fillStyle = 'black';
-		ctx.font = 'italic 13px sans-serif';
+		ctx.font = '13px helvetica';
 		wrapText(ctx, node.name, pt.x, pt.y, maxWidth, lineHeight);
 
         })    			
@@ -167,7 +196,8 @@ var sys;
     return that
   }    
   $(document).ready(function(){
-    sys = arbor.ParticleSystem(1000, 600, 0.5) // create the system with sensible repulsion/stiffness/friction
+    sys = arbor.ParticleSystem({repulsion:1000, stiffness:600,
+	friction:0.5}) // create the system with sensible repulsion/stiffness/friction
     sys.parameters({gravity:true}) // use center-gravity to make the graph settle nicely (ymmv)
     sys.renderer = Renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
 
@@ -248,4 +278,46 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
     context.fillText(line, x, y);
     return {width: actWidth, height: actHeight};
 }
-
+/**
+   * Draws a rounded rectangle using the current state of the canvas. 
+    * If you omit the last three params, it will draw a rectangle 
+     * outline with a 5 pixel border radius 
+      * @param {CanvasRenderingContext2D} ctx
+       * @param {Number} x The top left x coordinate
+        * @param {Number} y The top left y coordinate 
+	 * @param {Number} width The width of the rectangle 
+	  * @param {Number} height The height of the rectangle
+	   * @param {Number} radius The corner radius. Defaults to 5;
+	    * @param {Boolean} fill Whether to fill the rectangle.
+	    * Defaults to false.
+	     * @param {Boolean} stroke Whether to stroke the
+	     * rectangle. Defaults to true.
+	      */
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+    if (typeof stroke == "undefined" ) {
+	stroke = true;
+    }
+    if (typeof radius === "undefined") {
+	radius = 5;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y +
+	    radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x +
+	    width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y +
+	    height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+    if (stroke) {
+	ctx.stroke();
+    }
+    if (fill) {
+	ctx.fill();
+    }        
+}
