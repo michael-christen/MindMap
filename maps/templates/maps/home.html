@@ -16,9 +16,32 @@
 margin-top: 15px'>Alchemize</button>
 <h1 id="Category" class="span7"></h1>
 </div>
+<div class='row'>
+    <textarea id="input" class='span7' style="height: 225px" rows="10">
+    </textarea>
+    <div class='span5'>
+	<ul class="nav nav-tabs" id='myTab'>
+	   <li class='active'><a href='#concepts' data-toggle='tab'>Concepts</a></li>
+	   <li><a href='#entities' data-toggle='tab'>Entities</a></li>
+	   <li><a href='#keywords' data-toggle='tab'>Keywords</a></li>
+	</ul>
+	<div class='tab-content'>
+	   <div class='tab-pane active' id='concepts'>
+	      <ul id='conceptList'>
+	      </ul>
+	   </div>
+	   <div class='tab-pane' id='entities'>
+	      <ul id='entityList'>
+	      </ul>
+	   </div>
+	   <div class='tab-pane' id='keywords'>
+	      <ul id='keywordList'>
+	      </ul>
+	   </div>
+	</div>
+    </div>
 </div>
-<textarea id="input" style="width:654px; height: 225px" rows="10">
-</textarea>
+</div>
 <p id="output">
 </p>
 <canvas id="viewport" width="1350" height="800"></canvas>
@@ -26,5 +49,5 @@ margin-top: 15px'>Alchemize</button>
 <script src="{% static "arbor/arbor.js" %}"></script>  
 <script src="{% static "arbor/arbor-tween.js" %}"></script>  
 <script src="{% static "maps/js/relations.js" %}"></script>  
-
+<script src="{% static "bootstrap/js/bootstrap-tabs.js" %}"></script>  
 {% endblock %}
