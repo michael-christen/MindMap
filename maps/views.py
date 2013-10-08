@@ -14,8 +14,6 @@ def home(request):
 def homeLoad(request, noteId):
     note = Note.objects.get(pk=noteId)
     lectures = Lecture.objects.all()
-    print note.text
-    print "hello there"
     return render(request, 'maps/home.html',{'lectures':lectures,'noteText':note.text})
 
 def loadAll(request, lectureId):
